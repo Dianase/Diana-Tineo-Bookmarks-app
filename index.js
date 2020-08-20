@@ -18,10 +18,20 @@ function renderBookmarkApp(){
 }
 
 //This function will take the user's input and put it in an object that holds all values
-function generateBookmark(){
+function generateNewBookmark(){
 
 }
 
 function addBookmarkList(){
 
 }
+
+function deleteBookmark(){
+
+}
+/**a.	renderShoppingList => "A list should be rendered to the page"
+b.	handleNewBookmarkSubmit => "You should be able to add BOOKMARKS to the list"
+c.	handleBookmarkCheckClicked => "You should be able to check BOOKMARKS on the list"
+d.	handleDeleteBookmarkClicked => "You should be able to delete BOOKMARKS from the list"
+e.	The final function, handleShoppingList, will be responsible for calling all our other ones. It will be the callback function for our app's document ready.
+ */

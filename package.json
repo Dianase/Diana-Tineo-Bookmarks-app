@@ -4,7 +4,9 @@
   "description": "My awesome Bookmark",
   "main": "index.js",
   "scripts": {
-    "test": "testgit "
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Dianase/Bookmark/issues"
   },
-  "homepage": "https://github.com/Dianase/Bookmark#readme"
+  "homepage": "https://github.com/Dianase/Bookmark#readme",
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
 }
