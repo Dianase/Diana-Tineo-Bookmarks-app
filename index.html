@@ -4,33 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bookmark App</title>
-  <script src="https://kit.fontawesome.com/b775bddac3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
   <div class="header">
     <h1>My Favorite Bookmarks</h1>
   </div>
+  <div class="filter-by-type"><select name="FilterBy">
+      <option value="0">Filter by Rating</option>
+      <option value="5">5-star</option>
+      <option value="4">4-star</option>
+      <option value="3">3-star</option>
+      <option value="2">2-star</option>
+      <option value="1">1-star</option>
+    </select></div>
   <section class="main">
     <div>
-      <form>
-        <label for="url">Add Bookmark</label><input id="url" type="text" name="bookmark">
+      <form >
+        <label for="url">Bookmark URL</label><input id="url" type="text" name="bookmark">
         <label for="title">Title</label><input id="title" type="text" name="bookmark-title">
+        <label for="description">Description</label><input id="description" type="text" name="description-field">
+        <button type="submit" >Save</button>
       </form>
     </div>
     <div class="bookmark-holder">
-      <ul>
-        <li></li>
-      </ul>
+      <ul id="holder"></ul>
     </div>
-    <div class="filter-by-type"><select name="FilterBy">
-        <option value="0">Filter by Rating</option>
-        <option value="5">5-star</option>
-        <option value="4">4-star</option>
-        <option value="3">3-star</option>
-        <option value="2">2-star</option>
-        <option value="1">1-star</option>
-      </select></div>
+
   </section>
 </body>
 

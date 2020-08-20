@@ -1,0 +1,27 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  background-color: bisque;
+  align-items: center;
+}
+
+h1{
+  text-align: center;
+}
+div{
+  margin: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+form{
+  align-content: center;
+  
+
+}
+label{
+  font-weight: bold;
+  margin: 10px;
+}
