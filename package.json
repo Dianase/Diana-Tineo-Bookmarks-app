@@ -1,0 +1,19 @@
+{
+  "name": "bookmark",
+  "version": "1.0.0",
+  "description": "My awesome Bookmark",
+  "main": "index.js",
+  "scripts": {
+    "test": "testgit "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dianase/Bookmark.git"
+  },
+  "author": "Dianase",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dianase/Bookmark/issues"
+  },
+  "homepage": "https://github.com/Dianase/Bookmark#readme"
+}
