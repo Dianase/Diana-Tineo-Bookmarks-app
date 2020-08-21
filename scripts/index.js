@@ -32,6 +32,7 @@ function generateBookmarkList() {
     </ul>
   `;
 }
+console.log(generateBookmarkList);
 
 function generateLoader() {
   return `
@@ -45,16 +46,16 @@ function generateForm() {
       <label for="bookmark">Bookmark</label><input type="text" id="url" placeholder="URL">
       <label for="title">Title</label><input type="text" id="title" placeholder="Title" />
       <label for="description">Description</label><input type='text' id="add-description" placeholder='Description'/>
-    
-        <label for="star1">1</label><input type="radio" id="rating" name="star1">
-        <label for="star2">2</label><input type="radio" id="rating" name="star2">
-        <label for="star3">3</label><input type="radio" id="rating" name="star3">
-        <label for="star4">4</label><input type="radio" id="rating" name="star4">
-        <label for="star5">5</label><input type="radio" id="rating" name="star5">
+      <label for="rating">Rating</label>
+        <input type="radio" id="star1-rating" name="star" value="1"><label for="star1">1</label>
+        <input type="radio" id="star2-rating" name="star" value="2"><label for="star2">2</label>
+        <input type="radio" id="star3-rating" name="star" value="3"><label for="star3">3</label>
+        <input type="radio" id="star4-rating" name="star" value="4"><label for="star4">4</label>
+        <input type="radio" id="star5-rating" name="star" value="5"><label for="star5">5</label>
       
       <button type='submit' class='submit-button'>Submit</button> 
     </form>
-    <div class="filter-by-type"><select name="Filter-by-rating">
+    <div class="filter-by-rating"><select name="filter-by-rating">
     <option value="0">Filter by Rating</option>
     <option value="5">5-star</option>
     <option value="4">4-star</option>
@@ -67,11 +68,12 @@ console.log(generateForm);
 // event handlers
 //when a new bookmark is submitted, retrieves the user's data and creates an object for the bookmark
 function handleSubmitBookmark() {
-  $('#main').on('submit', '.add-new', (e) => {
+  $('.main').on('submit', '.add-new', (e) => {
     e.preventDefault();
     const url = $('#url').val();
     const title = $('#title').val();
     const description = $('#description').val();
+    const rating = $('input ["type=radio"]').val();
     const bookmark = { url, title, description, rating };
 
     api
@@ -88,6 +90,7 @@ function handleSubmitBookmark() {
   });
 }
 console.log(handleSubmitBookmark);
+
 // helper for delete --retrieves the id of the item
 function getIdFromEl(item) {
   return $(item).closest('.bookmark-element').data('item-id');
@@ -109,6 +112,12 @@ function handleDeleteBookmark() {
       });
   });
 }
+
+
+// function handleRating(){
+//   $('input [type="radio"]').on('click', function(){
+//     const ratingValue = $('input[name="star"]:checked').val();
+//   })}
 
 function bindEventListeners() {
   handleSubmitBookmark();
