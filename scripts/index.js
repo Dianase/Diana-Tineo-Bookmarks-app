@@ -12,16 +12,18 @@
 
 import api from './api.js';
 import store from './store.js';
+import $ from 'jquery';
 
-// mark up generators
+// creates bookmark to be displayed
 function generateBookmark(bookmark) {
   return `
-    <li class='bookmark-element' data-item-id="${bookmark.id}">
-      Title: ${bookmark.title} Author: ${bookmark.author}
+    <li class="bookmark-element" data-item-id="${bookmark.id}">
+      Title: ${bookmark.title} Rating: ${bookmark.rating}
       <button class="delete-bookmark">Delete Bookmark</button>
     </li>
   `;
 }
+console.log(generateBookmark);
 
 function generateBookmarkList() {
   return `
@@ -33,19 +35,26 @@ function generateBookmarkList() {
 
 function generateLoader() {
   return `
-    <div>Loading...</div>
+    <div>Bookmark App is Loading...</div>
   `;
 }
-
+//creates the content that will be displayed at the start consistently
 function generateForm() {
-  $("#main").add(`
+  $(".main").html(`
     <form class="add-new">
-      <label for="bookmark">Bookmark</label><input type="text" id="add-url" placeholder="URL">
-      <label for="title">Title</label><input type="text" id="add-title" placeholder="Title" />
+      <label for="bookmark">Bookmark</label><input type="text" id="url" placeholder="URL">
+      <label for="title">Title</label><input type="text" id="title" placeholder="Title" />
       <label for="description">Description</label><input type='text' id="add-description" placeholder='Description'/>
-      <button type='submit' class='submit-button'>Submit</button>
+    
+        <label for="star1">1</label><input type="radio" id="rating" name="star1">
+        <label for="star2">2</label><input type="radio" id="rating" name="star2">
+        <label for="star3">3</label><input type="radio" id="rating" name="star3">
+        <label for="star4">4</label><input type="radio" id="rating" name="star4">
+        <label for="star5">5</label><input type="radio" id="rating" name="star5">
+      
+      <button type='submit' class='submit-button'>Submit</button> 
     </form>
-    <div class="filter-by-type"><select name="FilterBy">
+    <div class="filter-by-type"><select name="Filter-by-rating">
     <option value="0">Filter by Rating</option>
     <option value="5">5-star</option>
     <option value="4">4-star</option>
@@ -54,20 +63,21 @@ function generateForm() {
     <option value="1">1-star</option>
   </select></div>`);
 }
-
+console.log(generateForm);
 // event handlers
+//when a new bookmark is submitted, retrieves the user's data and creates an object for the bookmark
 function handleSubmitBookmark() {
   $('#main').on('submit', '.add-new', (e) => {
     e.preventDefault();
-
-    const title = $('#add-title').val();
-    const description = $('#add-description').val();
-    const bookmark = { title, author };
+    const url = $('#url').val();
+    const title = $('#title').val();
+    const description = $('#description').val();
+    const bookmark = { url, title, description, rating };
 
     api
       .createNewBookmark(bookmark)
       .then((bookmark) => {
-        store.setAddedBookmark(book);
+        store.setAddedBookmark(bookmark);
         render();
       })
       .catch((err) => {
@@ -77,14 +87,19 @@ function handleSubmitBookmark() {
       });
   });
 }
+console.log(handleSubmitBookmark);
+// helper for delete --retrieves the id of the item
+function getIdFromEl(item) {
+  return $(item).closest('.bookmark-element').data('item-id');
+}
 
 function handleDeleteBookmark() {
-  $('#root').on('click', '.delete-bookmark', (e) => {
+  $('#main').on('click', '.delete-bookmark', (e) => {
     const id = getIdFromEl(e.currentTarget);
     api
-      .deleteBook(id)
+      .deleteBookmark(id)
       .then(() => {
-        store.setDeleteBook(id);
+        store.setDeleteBookmark(id);
         render();
       })
       .catch((err) => {
@@ -99,8 +114,8 @@ function bindEventListeners() {
   handleSubmitBookmark();
   handleDeleteBookmark();
 }
-
-export function render() {
+//dynamically add content 
+function render() {
   let html = '';
   if (store.isLoading) {
     html += generateLoader();
@@ -109,10 +124,10 @@ export function render() {
     html += generateForm();
   }
 
-  $('#root').html(html);
+  $('#main').html(html);
 }
 
-export function start() {
+function start() {
   bindEventListeners();
   api
     .fetchAllBookmarks()
@@ -128,9 +143,10 @@ export function start() {
     });
 }
 
-// helper
-function getIdFromEl(item) {
-  return $(item).closest('.bookmark-element').data('item-id');
+
+function main() {
+  render();
+  start();
 }
 
-
+$(main());
