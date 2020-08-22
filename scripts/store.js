@@ -1,7 +1,6 @@
 
 export default {
   bookmarks: [],
-  isLoading: true,
   error: null,
   setAllBookmarks: function (bookmarks) {
     this.bookmarks = bookmarks;
@@ -15,7 +14,5 @@ export default {
   setError: function (msg) {
     this.error = msg;
   },
-  setIsLoading: function (bool) {
-    this.isLoading = bool;
-  },
+  
 };
