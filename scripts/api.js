@@ -17,7 +17,6 @@ function createNewBookmark(bookmark) {
     body: newBookmark,
   })
   .then((res) => res.json());
- 
 }
 
 //request to DELETE bookmark from server

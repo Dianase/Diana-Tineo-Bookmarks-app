@@ -33,7 +33,14 @@ export function generateBookmark(bookmark) {
 
 export function generateBookmarkList() {
   console.log(store.bookmarks);
-  return `
+  return `<div class="filter-by-rating"><select name="filter-by-rating">
+  <option value="0">Filter by Rating</option>
+  <option value="5">5-star</option>
+  <option value="4">4-star</option>
+  <option value="3">3-star</option>
+  <option value="2">2-star</option>
+  <option value="1">1-star</option>
+</select></div>
     <ul>
       ${store.bookmarks.map((bookmark) => generateBookmark(bookmark)).join()}
     </ul>
@@ -47,7 +54,7 @@ export function generateBookmarkList() {
 function generateForm() {
   return `
     <form class="add-new">
-      <label for="bookmark">Bookmark</label><input type="text" id="url" placeholder="URL">
+      <label for="bookmark">Add New Bookmark</label><input type="text" id="url" placeholder="https://link-here">
       <label for="title">Title</label><input type="text" id="title" placeholder="Title" />
       <label for="desc">Description</label><input type='text' id="desc" placeholder="Description"/>
       <label for="rating">Rating</label>
@@ -58,14 +65,7 @@ function generateForm() {
         <input type="radio" id="star5-rating" name="star" value="5"><label for="star5">5</label>
       <button type='submit' class='submit-button'>Submit</button> 
     </form>
-    <div class="filter-by-rating"><select name="filter-by-rating">
-    <option value="0">Filter by Rating</option>
-    <option value="5">5-star</option>
-    <option value="4">4-star</option>
-    <option value="3">3-star</option>
-    <option value="2">2-star</option>
-    <option value="1">1-star</option>
-  </select></div>`;
+    `;
 }
 
 // event handlers
@@ -126,6 +126,9 @@ export function handleDeleteBookmark() {
 //   $('input [type="radio"]').on('click', function(){
 //     const ratingValue = $('input[name="star"]:checked').val();
 //   })}
+
+
+
 
 function bindEventListeners() {
   handleSubmitBookmark();

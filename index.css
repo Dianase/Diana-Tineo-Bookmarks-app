@@ -17,7 +17,8 @@ h1{
 
 .main{
   display: flex;
-  flex-direction: row;
+  
+  flex-direction: column;
   
 }
 
@@ -35,11 +36,14 @@ button{
   background-color:#ebde9a;
   width: 50%;
   align-content: center;
-  position: absolute;
   color: #001f3f;
   margin-left:5px;
 }
 
+input{
+  width:40%;
+  margin-left: 35%;
+}
 
 
 select {
@@ -48,9 +52,12 @@ select {
 }
 
 .add-new{
-
+  display:flex;
   flex-direction: column;
+  text-align: center;
+  align-content: center;
 }
 ul{
   align-items: center;
 }
+
