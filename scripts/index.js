@@ -20,32 +20,36 @@ import $ from 'jquery';
 export function generateBookmark(bookmark) {
   return`
     <li class="bookmark-element" data-item-id="${bookmark.id}">
-      <a href="${bookmark.url}">Title:${bookmark.title} Rating:${bookmark.rating}<a/>
+      <span><a href="${bookmark.url}">${bookmark.title}</a>
       <br>
+      Description:${bookmark.description}
+       Rating:${bookmark.rating}
+      </span>
       <button class="delete-bookmark">Delete Bookmark</button>
     </li>
   `;
-
 }
 
 
 export function generateBookmarkList() {
-  return`
+  console.log(store.bookmarks);
+  return `
     <ul>
-      ${store.bookmarks.map((bookmark) => generateBookmark(bookmark)).join('')}
+      ${store.bookmarks.map((bookmark) => generateBookmark(bookmark)).join()}
     </ul>
   `;
+
 }
 
 
 
 //the content that will be displayed at the start 
 function generateForm() {
-  return`
+  return `
     <form class="add-new">
       <label for="bookmark">Bookmark</label><input type="text" id="url" placeholder="URL">
       <label for="title">Title</label><input type="text" id="title" placeholder="Title" />
-      <label for="description">Description</label><input type='text' id="add-description" placeholder='Description'/>
+      <label for="desc">Description</label><input type='text' id="desc" placeholder="Description"/>
       <label for="rating">Rating</label>
         <input type="radio" id="star1-rating" name="star" value="1"><label for="star1">1</label>
         <input type="radio" id="star2-rating" name="star" value="2"><label for="star2">2</label>
@@ -67,26 +71,27 @@ function generateForm() {
 // event handlers
 //when a new bookmark is submitted, retrieves the user's data and creates an object for the bookmark
 export function handleSubmitBookmark() {
-  $('.add-new').on('submit', '.submit-button', (e) => {
+  $('.main').on('click', '.submit-button', (e) => {
     e.preventDefault();
     const url = $('#url').val();
     const title = $('#title').val();
-    const description = $('#description').val();
+    const desc = $('#desc').val();
     const rating = $('input [type="radio"]').val();
-    const bookmark= { url, title, description, rating };
-    
+    const bookmark = { url, title, desc, rating };
+
+    console.log(bookmark);
 
     api
       .createNewBookmark(bookmark)
       .then((bookmark) => {
-        store.setAddedBookmark(bookmark);
-        render();
         console.log(bookmark);
+        store.setAddedBookmark(bookmark);
+        render();      
       })
       .catch((err) => {
         console.log(err);
         store.setError(err.message);
-        render();
+       render();
       });
   });
 }
@@ -97,8 +102,9 @@ function getIdFromEl(item) {
   return $(item).closest('.bookmark-element').data('item-id');
 }
 
-function handleDeleteBookmark() {
-  $('.bookmark-element').on('click', '.delete-bookmark', (e) => {
+export function handleDeleteBookmark() {
+  $('.bookmark').on('click', '.delete-bookmark', (e) => {
+    e.preventDefault();
     const id = getIdFromEl(e.currentTarget);
     api
       .deleteBookmark(id)
@@ -129,7 +135,7 @@ function bindEventListeners() {
 function render() {
   let html = '';
   html += generateBookmarkList();
-  $('.bookmarks').append(html);
+  $('.bookmark').html(html);
 }
 
 function start() {
@@ -138,7 +144,7 @@ function start() {
     .fetchAllBookmarks()
     .then((bookmarks) => {
       store.setAllBookmarks(bookmarks);
-    render();
+      render();
     })
     .catch((err) => {
       console.log(err);
@@ -151,7 +157,7 @@ function start() {
 function main() {
   render();
   start();
-  let form ='';
+  let form = '';
   form += generateForm();
   $('.main').html(form);
 }

@@ -15,13 +15,19 @@ h1{
     text-align: center;
   }
 
+.main{
+  display: flex;
+  flex-direction: row;
+  
+}
+
 label{
       font-weight: bold;
       margin: 10px;
     }
 
 div{
-      margin: 8px;
+      margin: 5px;
       display: flex;
 }
 
@@ -31,7 +37,7 @@ button{
   align-content: center;
   position: absolute;
   color: #001f3f;
-  margin-left:10px;
+  margin-left:5px;
 }
 
 
@@ -44,4 +50,7 @@ select {
 .add-new{
 
   flex-direction: column;
+}
+ul{
+  align-items: center;
 }
