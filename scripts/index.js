@@ -18,7 +18,7 @@ import $ from 'jquery';
 
 
 export function generateBookmark(bookmark) {
-  return`
+  return `
     <li class="bookmark-element" data-item-id="${bookmark.id}">
       <a href="${bookmark.url}">${bookmark.title}</a>
       <br>
@@ -88,12 +88,12 @@ export function handleSubmitBookmark() {
       .then((bookmark) => {
         console.log(bookmark);
         store.setAddedBookmark(bookmark);
-        render();      
+        render();
       })
       .catch((err) => {
         console.log(err);
         store.setError(err.message);
-       render();
+        render();
       });
   });
 }
