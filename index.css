@@ -8,7 +8,7 @@
 
 html{
   background-color: #001f3f;  
-  margin: 20px;
+  
 }
 
 h1{
@@ -42,9 +42,14 @@ button{
 
 input{
   width:40%;
-  margin-left: 35%;
+  margin-left: 30%;
+  padding:15px;
 }
 
+.submit-button{
+  margin-left:25%;
+
+}
 
 select {
   color:#001f3f;

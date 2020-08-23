@@ -20,11 +20,12 @@ import $ from 'jquery';
 export function generateBookmark(bookmark) {
   return`
     <li class="bookmark-element" data-item-id="${bookmark.id}">
-      <span><a href="${bookmark.url}">${bookmark.title}</a>
+      <a href="${bookmark.url}">${bookmark.title}</a>
       <br>
-      Description:${bookmark.description}
-       Rating:${bookmark.rating}
-      </span>
+      Description:${bookmark.desc}
+      <br>
+      Rating:${bookmark.rating}
+      <br>
       <button class="delete-bookmark">Delete Bookmark</button>
     </li>
   `;
@@ -41,6 +42,7 @@ export function generateBookmarkList() {
   <option value="2">2-star</option>
   <option value="1">1-star</option>
 </select></div>
+
     <ul>
       ${store.bookmarks.map((bookmark) => generateBookmark(bookmark)).join()}
     </ul>
@@ -126,8 +128,6 @@ export function handleDeleteBookmark() {
 //   $('input [type="radio"]').on('click', function(){
 //     const ratingValue = $('input[name="star"]:checked').val();
 //   })}
-
-
 
 
 function bindEventListeners() {
